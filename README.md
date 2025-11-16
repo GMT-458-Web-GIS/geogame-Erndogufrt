@@ -87,3 +87,5 @@ This section answers the specific questions outlined in the assignment brief.
 
 * **Leaflet.js:** Will be used as the primary library for rendering the interactive base map, handling map tiles, and processing user click events (guesses).
 * **Deck.gl (Bonus Package):** We plan to use Deck.gl to achieve the bonus. [cite: 19] After a user makes a guess, we will use Deck.gl to render an advanced **HeatmapLayer** over the Leaflet map. This layer will visualize the *actual* taxi pickup density for the given time, providing sophisticated geovisualization feedback to the user.
+
+![Oyun Arayüzü Taslağı](./görsel_2025-11-16_234743958.png)
