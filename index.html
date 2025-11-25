@@ -1,0 +1,111 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>GeoGame Template</title>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet/dist/leaflet.css" />
+
+    <style>
+        body {
+            margin: 0;
+            font-family: Arial, sans-serif;
+        }
+
+        #top-bar {
+            width: 100%;
+            background: #222;
+            color: #fff;
+            padding: 10px;
+            font-size: 18px;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        #map {
+            width: 100%;
+            height: calc(100vh - 50px);
+        }
+
+        #start-btn {
+            background: rgb(0, 153, 255);
+            border: none;
+            padding: 8px 14px;
+            font-size: 16px;
+            border-radius: 6px;
+            cursor: pointer;
+            color: white;
+        }
+
+        #start-btn:hover {
+            background: rgb(0, 120, 200);
+        }
+    </style>
+</head>
+<body>
+
+<div id="top-bar">
+    <div>Score: <span id="score">0</span></div>
+    <div>Time left: <span id="timer">30</span>s</div>
+    <button id="start-btn">Start Game</button>
+</div>
+
+<div id="map"></div>
+
+<script src="https://unpkg.com/leaflet/dist/leaflet.js"></script>
+
+<script>
+    // Map Setup
+    const map = L.map('map').setView([40.7128, -74.0060], 11); // NYC default
+
+    L.tileLayer('https://{s}.tile.openstreetmap.org/{z}/{x}/{y}.png', {
+        maxZoom: 19
+    }).addTo(map);
+
+    // Game variables
+    let score = 0;
+    let timeLeft = 30;
+    let timerInterval;
+    let targetMarker;
+
+    function spawnTarget() {
+        if (targetMarker) map.removeLayer(targetMarker);
+
+        const lat = 40.70 + Math.random() * 0.10;
+        const lng = -74.03 + Math.random() * 0.06;
+
+        targetMarker = L.marker([lat, lng]).addTo(map);
+        targetMarker.bindPopup("Click me!").openPopup();
+
+        targetMarker.on("click", () => {
+            score++;
+            document.getElementById("score").innerText = score;
+            spawnTarget(); // new target
+        });
+    }
+
+    document.getElementById("start-btn").onclick = function () {
+        score = 0;
+        timeLeft = 30;
+        document.getElementById("score").innerText = score;
+        document.getElementById("timer").innerText = timeLeft;
+
+        map.setView([40.7128, -74.0060], 11);
+
+        spawnTarget();
+
+        clearInterval(timerInterval);
+        timerInterval = setInterval(() => {
+            timeLeft--;
+            document.getElementById("timer").innerText = timeLeft;
+
+            if (timeLeft <= 0) {
+                clearInterval(timerInterval);
+                alert("Time's up! Your score: " + score);
+            }
+        }, 1000);
+    };
+</script>
+
+</body>
+</html>
