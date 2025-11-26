@@ -1,0 +1,52 @@
+/* GENEL AYARLAR */
+body { margin: 0; background: #050505; color: #e0d0b0; font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif; overflow: hidden; }
+.hidden { display: none !important; }
+
+/* Ekranlar */
+#intro-screen, #end-screen {
+    position: absolute; top: 0; left: 0; width: 100%; height: 100vh;
+    background: radial-gradient(circle at center, #1a1a1a, #000);
+    display: flex; justify-content: center; align-items: center; z-index: 2000;
+}
+.box {
+    text-align: center; border: 2px solid #c5a059; padding: 40px;
+    background: rgba(0,0,0,0.9); box-shadow: 0 0 40px rgba(197, 160, 89, 0.3); border-radius: 10px;
+    max-width: 600px;
+}
+.title { font-size: 3.5rem; color: #c5a059; margin: 0; text-shadow: 0 0 15px #000; letter-spacing: 5px; }
+.subtitle { font-style: italic; color: #888; margin-bottom: 30px; font-size: 1.2rem; }
+
+button {
+    background: transparent; border: 2px solid #c5a059; color: #c5a059;
+    padding: 15px 40px; font-size: 1.2rem; cursor: pointer;
+    transition: 0.3s; font-weight: bold; text-transform: uppercase; letter-spacing: 2px;
+}
+button:hover:not(:disabled) { background: #c5a059; color: #000; box-shadow: 0 0 25px #c5a059; }
+button:disabled { border-color: #444; color: #444; cursor: not-allowed; }
+
+/* Oyun Alanı */
+#map { height: 100vh; width: 100%; background: #1a1a1a; }
+
+#stats {
+    position: absolute; top: 20px; right: 20px; z-index: 1000;
+    background: rgba(0,0,0,0.85); border: 1px solid #c5a059; padding: 15px 25px;
+    font-size: 1.1rem; border-radius: 5px; color: #fff;
+    pointer-events: none;
+}
+#score { color: #ffd700; font-weight: bold; }
+#fail { color: #ff4444; font-weight: bold; }
+
+#quest-card {
+    position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+    width: 60%; background: rgba(15, 15, 15, 0.95); border: 2px solid #c5a059;
+    padding: 25px; text-align: center; z-index: 1000; border-radius: 8px;
+    box-shadow: 0 0 30px rgba(0,0,0,0.9);
+    pointer-events: none; /* Harita tıklamasını engellemesin */
+}
+#quest-card h3 { margin: 0 0 15px 0; color: #c5a059; letter-spacing: 2px; border-bottom: 1px solid #333; padding-bottom: 10px; }
+#riddle-text { font-size: 1.4rem; margin: 0; line-height: 1.5; }
+
+/* Poligon Stilleri ve Popup */
+.leaflet-popup-content-wrapper { background: #222; color: #fff; border: 1px solid #c5a059; border-radius: 4px; text-align: center;}
+.leaflet-popup-tip { background: #c5a059; }
+.leaflet-interactive { transition: fill 0.3s, stroke-width 0.2s; cursor: crosshair; }
